@@ -167,6 +167,42 @@
         );
     });
 
+    test('when the event play is triggered at second time with a delay of 2 seconds', function() {
+        var inner_html_play = 'Play 2.',
+            inner_html_pause = 'Pause 1.',
+            inner_html_elapsed_time = 'Elapsed time between pause/resume 2s.';
+
+        player.npaw();
+        player.trigger('play');
+        player.trigger('pause');
+
+        // Stop JavaSript execution to get 2 seconds..
+        function sleep(miliseconds) {
+           var currentTime = new Date().getTime();
+
+           while (currentTime + miliseconds >= new Date().getTime()) {
+           }
+       }
+        sleep(2000);
+        player.trigger('play');
+
+        strictEqual(
+            player.el().querySelector('li#li_play').innerHTML,
+            inner_html_play,
+            'li#li_play inner html is strictEqual to: ' + inner_html_play
+        );
+        strictEqual(
+            player.el().querySelector('li#li_pause').innerHTML,
+            inner_html_pause,
+            'li#li_pause inner html is strictEqual to: ' + inner_html_pause
+        );
+        strictEqual(
+            player.el().querySelector('li#li_elapsed_time').innerHTML,
+            inner_html_elapsed_time,
+            'li#li_elapsed_time inner html is strictEqual to: ' + inner_html_elapsed_time
+        );
+    });
+
     test('when the event ended is triggered', function() {
         var inner_html_ended = 'Video ended.';
 
