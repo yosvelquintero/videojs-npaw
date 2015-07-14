@@ -26,36 +26,41 @@ class Api
 
     private function getData()
     {
-        $event = $this->getDataFromUrl('event');
+        $event        = $this->getDataFromUrl('event');
+        $elapsed_time = (integer) $this->getDataFromUrl('elapsed_time');
+        $current_src  = urldecode($this->getDataFromUrl('current_src'));
 
         switch ($event) {
             case 'firstplay':
-                $this->data = [
+                $this->data[] = (object) [
                     'status' => (integer) 200,
-                    'event' => (string) 'Event firstplay.'
+                    'event' => (string) 'Event firstplay.',
+                    'current_src' => $current_src
                 ];
                 break;
 
             case 'play':
-                $this->data   = [
+                $this->data = (object) [
                     'status' => (integer) 200,
                     'event' => (string) 'Event play',
-                    'elapsed_time' => (integer) $this->getDataFromUrl('elapsed_time')
+                    'elapsed_time' => $elapsed_time,
+                    'current_src' => $current_src
                 ];
                 break;
 
             case 'ended':
-                $this->data = [
+                $this->data = (object) [
                     'status' => (integer) 200,
-                    'event' => (string) 'Event ended.'
+                    'event' => (string) 'Event ended.',
+                    'current_src' => $current_src
                 ];
                 break;
 
             default:
                 $this->setHeaderForbidden();
-                $this->data = [
+                $this->data = (object) [
                     'status' => (integer) 403,
-                    'message' => (string) 'Error 403 Access Denied/Forbidden'
+                    'message' => (string) 'Error 403 Access Denied/Forbidden.'
                 ];
                 break;
         }
@@ -65,8 +70,7 @@ class Api
 
     public function setJsonResponse()
     {
-        $json = ['data' => $this->getData()];
-        return json_encode($json);
+        return json_encode($this->getData());
     }
 }
 
