@@ -44,7 +44,7 @@
             player = videojs(video);
 
             // initialize the plugin with the default options
-            player.npaw();
+            player.npaw({});
         },
         teardown: function() {
             videojs.Html5.isSupported = realIsHtmlSupported;

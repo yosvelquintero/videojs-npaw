@@ -23,24 +23,34 @@
         </style>
     </head>
     <body>
-        <div class="info">
-            <p>You can see the Video.js Npaw plugin in action below.
-            Look at the source of this page to see how to use it with your videos.</p>
+        <div class="content">
+            <div class="info">
+                <p>You can see the Video.js Npaw plugin in action below.
+                Look at the source of this page to see how to use it with your videos.</p>
+            </div>
+            <video id="video"
+                class="video-js vjs-default-skin"
+                height="300"
+                width="600"
+                controls>
+                <p>Your browser doesn't support video. Please <a href="http://browsehappy.com/">upgrade your browser</a> to see the example.</p>
+                <source src="http://project.dev/UFC189MendesvsMcGregor-FighterPicks.mp4" type="video/mp4">
+                <!-- <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+                <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm"> -->
+            </video>
+
+            <!-- <ul id="notification"></ul> -->
         </div>
-        <video id="video"
-            class="video-js vjs-default-skin"
-            height="300"
-            width="600"
-            controls>
-            <p>Your browser doesn't support video. Please <a href="http://browsehappy.com/">upgrade your browser</a> to see the example.</p>
-            <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
-            <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
-        </video>
+
         <script src="node_modules/video.js/dist/video-js/video.js"></script>
         <script src="lib/videojs-npaw.js"></script>
         <script>
-            // fire up the plugin
-            videojs('video').npaw();
+            (function () {
+                var myDococument = document;
+
+                // fire up the plugin
+                videojs('video').npaw({});
+            })();
         </script>
     </body>
 </html>
