@@ -44,7 +44,7 @@
             player = videojs(video);
 
             // initialize the plugin with the default options
-            player.npaw({});
+            player.npaw();
         },
         teardown: function() {
             videojs.Html5.isSupported = realIsHtmlSupported;
@@ -56,7 +56,7 @@
     });
 
     test('require to trigger the event firstplay to create ul#notification and li elements', function() {
-        player.npaw({});
+        player.npaw();
 
         equal(
             player.el().querySelector('ul#notification'),
@@ -86,7 +86,7 @@
     });
 
     test('create ul#notification and li elements after the event firstplay has been triggered', function() {
-        player.npaw({});
+        player.npaw();
         player.trigger('firstplay');
 
         ok(
@@ -114,7 +114,7 @@
     test('when the event play is triggered at first time', function() {
         var inner_html_play = 'Play 1.';
 
-        player.npaw({});
+        player.npaw();
         player.trigger('play');
 
         strictEqual(
@@ -127,7 +127,7 @@
     test('when the event pause is triggered at first time', function() {
         var inner_html_pause = 'Pause 1.';
 
-        player.npaw({});
+        player.npaw();
 
         player.trigger('play');
         player.trigger('pause');
@@ -144,7 +144,7 @@
             inner_html_pause = 'Pause 1.',
             inner_html_elapsed_time = 'Elapsed time between pause/resume 0s.';
 
-        player.npaw({});
+        player.npaw();
 
         player.trigger('play');
         player.trigger('pause');
@@ -170,7 +170,7 @@
     test('when the event ended is triggered', function() {
         var inner_html_ended = 'Video ended.';
 
-        player.npaw({});
+        player.npaw();
 
         player.trigger('play');
         player.trigger('ended');
