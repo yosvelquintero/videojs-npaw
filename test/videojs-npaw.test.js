@@ -177,13 +177,11 @@
         player.trigger('pause');
 
         // Stop JavaSript execution to get 2 seconds..
-        function sleep(miliseconds) {
-           var currentTime = new Date().getTime();
+        (function(miliseconds) {
+            var currentTime = new Date().getTime();
 
-           while (currentTime + miliseconds >= new Date().getTime()) {
-           }
-       }
-        sleep(2000);
+            while (currentTime + miliseconds >= new Date().getTime()) {}
+        })(2000);
         player.trigger('play');
 
         strictEqual(
