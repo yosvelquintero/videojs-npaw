@@ -30,6 +30,9 @@ Default: 'http://project.dev/videojs-npaw/api/'
 The API url wish is consumed when the video starts (first play only), every time the user resume the content, and
 also when the video is finished.
 
+Always is sended to the API parameters like `event` and the video `current_src`, but when the event is play we also send
+the parameter `elapsed_time`.
+
 #### tn
 Type: `object`
 Default: {
