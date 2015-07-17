@@ -7,11 +7,26 @@
     var realIsHtmlSupported,
         player,
 
-        // local QUnit aliases
-        // http://api.qunitjs.com/
+        defaultSettings = {
+            api: 'http://project.dev/videojs-npaw/api/',
 
-        // module(name, {[setup][ ,teardown]})
-        module = qunit.module,
+            // Text notifications
+            tn: {
+                play: 'Play',
+                pause: 'Pause',
+                ended: 'Video ended',
+                elapsedTime: 'Elapsed time between pause/resume',
+                seconds: 's',
+                space: ' ',
+                dot: '.'
+            }
+        },
+
+    // local QUnit aliases
+    // http://api.qunitjs.com/
+
+    // module(name, {[setup][ ,teardown]})
+    module = qunit.module,
         // test(name, callback)
         test = qunit.test,
         // ok(value, [message])
@@ -44,7 +59,7 @@
             player = videojs(video);
 
             // initialize the plugin with the default options
-            player.npaw();
+            player.npaw(defaultSettings);
         },
         teardown: function() {
             videojs.Html5.isSupported = realIsHtmlSupported;
@@ -56,7 +71,7 @@
     });
 
     test('require to trigger the event firstplay to create ul#notification and li elements', function() {
-        player.npaw();
+        player.npaw(defaultSettings);
 
         equal(
             player.el().querySelector('ul#notification'),
@@ -86,7 +101,7 @@
     });
 
     test('create ul#notification and li elements after the event firstplay has been triggered', function() {
-        player.npaw();
+        player.npaw(defaultSettings);
         player.trigger('firstplay');
 
         ok(
@@ -114,7 +129,7 @@
     test('when the event play is triggered at first time', function() {
         var inner_html_play = 'Play 1.';
 
-        player.npaw();
+        player.npaw(defaultSettings);
         player.trigger('play');
 
         strictEqual(
@@ -127,7 +142,7 @@
     test('when the event pause is triggered at first time', function() {
         var inner_html_pause = 'Pause 1.';
 
-        player.npaw();
+        player.npaw(defaultSettings);
 
         player.trigger('play');
         player.trigger('pause');
@@ -144,7 +159,7 @@
             inner_html_pause = 'Pause 1.',
             inner_html_elapsed_time = 'Elapsed time between pause/resume 0s.';
 
-        player.npaw();
+        player.npaw(defaultSettings);
 
         player.trigger('play');
         player.trigger('pause');
@@ -172,7 +187,7 @@
             inner_html_pause = 'Pause 1.',
             inner_html_elapsed_time = 'Elapsed time between pause/resume 2s.';
 
-        player.npaw();
+        player.npaw(defaultSettings);
         player.trigger('play');
         player.trigger('pause');
 
@@ -204,7 +219,7 @@
     test('when the event ended is triggered', function() {
         var inner_html_ended = 'Video ended.';
 
-        player.npaw();
+        player.npaw(defaultSettings);
 
         player.trigger('play');
         player.trigger('ended');
